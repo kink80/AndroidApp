@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import myapp.com.myapplication.data.WordReaderDbHelper;
+import myapp.com.myapplication.data.WordsDatabaseContract;
+
 
 public class AuthorActivity extends ActionBarActivity {
 
@@ -67,7 +70,7 @@ public class AuthorActivity extends ActionBarActivity {
         ContentValues values = new ContentValues();
         values.put(WordsDatabaseContract.WordEntry.COLUMN_NAME_ORIGINAL, original.getText().toString());
         values.put(WordsDatabaseContract.WordEntry.COLUMN_NAME_TRANSLATION, translation.getText().toString());
-        values.put(WordsDatabaseContract.WordEntry.COLUMN_NAME_LEVEL, 50);
+        values.put(WordsDatabaseContract.WordEntry.COLUMN_NAME_PROBABILITY, 50);
 
         long newRowId;
 

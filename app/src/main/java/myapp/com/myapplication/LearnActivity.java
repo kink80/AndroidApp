@@ -4,11 +4,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import myapp.com.myapplication.data.DataProvider;
+import myapp.com.myapplication.data.InMemoryprovider;
+import myapp.com.myapplication.data.WordBean;
+import myapp.com.myapplication.data.WordReaderDbHelper;
+import myapp.com.myapplication.data.WordsDatabaseContract;
 
 
 public class LearnActivity extends ActionBarActivity {
@@ -19,11 +24,14 @@ public class LearnActivity extends ActionBarActivity {
     private long currentId = -1L;
     private String currentText =  "";
 
+    private DataProvider provider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn);
 
+        /*
         WordReaderDbHelper dbHelper = new WordReaderDbHelper(this);
         readableDb = dbHelper.getReadableDatabase();
 
@@ -35,7 +43,7 @@ public class LearnActivity extends ActionBarActivity {
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                WordsDatabaseContract.WordEntry.COLUMN_NAME_LEVEL + " DESC";
+                WordsDatabaseContract.WordEntry.COLUMN_NAME_PROBABILITY + " DESC";
 
         c = readableDb.query(
                 WordsDatabaseContract.WordEntry.TABLE_NAME,  // The table to query
@@ -56,6 +64,19 @@ public class LearnActivity extends ActionBarActivity {
             word.setText("Empty");
         }
 
+        */
+
+        provider = new InMemoryprovider();
+        provider.load();
+
+        TextView word = (TextView) findViewById(R.id.word);
+
+        WordBean wordBean = provider.getNext();
+        if (wordBean.isValid()) {
+            word.setText(wordBean.getWord());
+        } else {
+            word.setText("Empty");
+        }
     }
 
     @Override
@@ -90,7 +111,18 @@ public class LearnActivity extends ActionBarActivity {
     }
 
     public void rate(View view) {
+        String tag = String.valueOf(view.getTag());
+        provider.rateCurrent(tag);
+
         TextView word = (TextView) findViewById(R.id.word);
+        WordBean wordBean = provider.getNext();
+        if (wordBean.isValid()) {
+            word.setText(wordBean.getWord());
+        } else {
+            word.setText("Empty");
+        }
+
+        /*
         if(c != null && c.moveToNext()) {
             String first = c.getString(c.getColumnIndexOrThrow(WordsDatabaseContract.WordEntry.COLUMN_NAME_ORIGINAL));
             currentId = c.getLong(c.getColumnIndexOrThrow(WordsDatabaseContract.WordEntry._ID));
@@ -98,6 +130,7 @@ public class LearnActivity extends ActionBarActivity {
         } else {
             word.setText("Empty");
         }
+        */
 
     }
 }

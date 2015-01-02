@@ -9,9 +9,10 @@
     <string name="title_activity_learn">LearnActivity</string>
     <string name="title_activity_author">AuthorActivity</string>
 
-    <string name="button_plus">+1</string>
-    <string name="button_zero">0</string>
-    <string name="button_minus">-1</string>
+    <string name="button_high">High</string>
+    <string name="button_medium">Medium</string>
+    <string name="button_low">Low</string>
+    <string name="button_learned">Learned</string>
 
     <string name="new_word_hint">Original word</string>
     <string name="translation_hint">Translation</string>
