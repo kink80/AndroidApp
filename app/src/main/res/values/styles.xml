@@ -5,8 +5,17 @@
         <!-- Customize your theme here. -->
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#ffff585f</item>
+        <item name="android:textColor">#ffea5158</item>
         <item name="android:typeface">monospace</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textSize">25dp</item>
+        <item name="android:textColor">@color/primaryDark</item>
     </style>
 
 </resources>
